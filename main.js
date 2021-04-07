@@ -27,15 +27,24 @@ function getAPIdata() {
 		weatherBox.innerHTML = degC + '&#176;C <br>' + response.weather[0].description;
 		
 		document.getElementById("cloudImg").src = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
-		//zons 
+		
+		//zonsopkomst
 		var weatherBox = document.getElementById('sunrise');
 		var sunrise = Math.floor(response.sys.sunrise);
 		weatherBox.innerHTML = 'sunrise :' + sunrise + '<br>';
 
-		var weatherBox = document.getElementById('sunset');
-		var sunset = Math.floor(response.sys.sunrise);
-		weatherBox.innerHTML = 'sunset :' + sunrise + '<br>';
+		//Voor het omzetten naar normale tijd
+		var tijd = new Date(sunrise); //door deze twee regels word de tijd normaal in plaats van milliseconden.
+		document.getElementById('sunrise').innerHTML = tijd.toString(); //to string maakt hij er een gewonere datum tijd notatie van. Maar je kan ook uren en minuten los er uithalen zoals voor ch2
+	
 
+		//zonsondergang
+		var weatherBox = document.getElementById('sunset');
+		var sunset = Math.floor(response.sys.sunset);
+		weatherBox.innerHTML = 'sunset :' + sunset + '<br>';
+
+		var tijd = new Date(sunset); //door deze twee regels word de tijd normaal in plaats van milliseconden.
+		document.getElementById('sunset').innerHTML = tijd.toString();
 	});
 }
 
